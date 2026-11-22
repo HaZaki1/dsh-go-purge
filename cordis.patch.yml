@@ -1,0 +1,6 @@
+# dsh-go-purge bundle patch
+- id: system-prompt
+  config:
+    includeHarnessIdentity: false
+    personaPrefix: ""
+    personaSuffix: ""
