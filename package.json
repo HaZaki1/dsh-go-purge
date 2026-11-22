@@ -1,0 +1,61 @@
+{
+  "name": "dsh-go-purge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "dsh-purge 的 dsh-go 手机版适配：引擎内提示词注入 + 人设/规则集 + dsh-go 原生面板/胶囊/工具卡。不 patch 宿主、不写 shim、不替换审批界面。继承原始项目署名要求，见 ATTRIBUTION.md。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "skills",
+    "cordis.patch.yml",
+    "README.md",
+    "ATTRIBUTION.md",
+    "docs"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.19",
+    "dsh": ">=0.2.1-rc.2 <0.3.0-0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.2 <0.3.0-0",
+    "@deepseek-ai/schemastery": ">=0.2.1-rc.2 <0.3.0-0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dshGo": {
+    "v": 1,
+    "title": { "zh": "破甲", "en": "Purge" },
+    "icon": "bolt",
+    "contributes": {
+      "composer.actions": [
+        { "id": "purge.status", "label": { "zh": "状态", "en": "Status" }, "icon": "info" },
+        { "id": "purge.setpersona", "label": { "zh": "切人设", "en": "Persona" }, "icon": "user" }
+      ],
+      "composer.strip": [
+        { "id": "purge.strip", "icon": "bolt", "panel": "purge.main" }
+      ],
+      "panels": [
+        { "id": "purge.main", "title": { "zh": "破甲控制台", "en": "Purge console" }, "icon": "bolt", "placement": ["session.tab", "features", "chat.panel"], "presentation": "sheet" },
+        { "id": "purge.persona", "title": { "zh": "人设编辑", "en": "Persona editor" }, "icon": "edit", "placement": ["features", "plugin"] }
+      ],
+      "session.actions": [
+        { "id": "purge.copy", "label": { "zh": "复制规则", "en": "Copy rules" }, "icon": "copy" }
+      ]
+    }
+  },
+  "keywords": ["dsh-plugin", "dsh-bundle", "dsh-go", "prompts", "persona"],
+  "license": "MIT"
+}
