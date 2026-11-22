@@ -1,6 +1,17 @@
 # dsh-go-purge bundle patch
+# 只挂引擎侧入口；桌面 dsh-purge 的 asar / shim / 重启 / 网页控制台全部不带过来。
 - id: system-prompt
   config:
     includeHarnessIdentity: false
     personaPrefix: ""
     personaSuffix: ""
+
+- insert:
+    - id: dsh-go-purge
+      name: dsh-go-purge
+      inject: [systemPrompt, tools]
+      config:
+        enabled: true
+        mode: replace
+        capabilityProtocol: true
+        stripHostIdentity: true
